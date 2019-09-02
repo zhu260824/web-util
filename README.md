@@ -1,7 +1,7 @@
 # web-util
 一些个人使用的工具类
 
-web-util [![](https://jitpack.io/v/zhu260824/web-util.svg)](https://jitpack.io/#zhu260824/web-util)
+[![](https://jitpack.io/v/zhu260824/web-util.svg)](https://jitpack.io/#zhu260824/web-util)
 
 How to
 To get a Git project into your build:
