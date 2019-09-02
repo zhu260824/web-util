@@ -1,4 +1,4 @@
-package com.zl.common.config;
+package com.zl.common.systems;
 
 import jodd.util.PropertiesUtil;
 import org.apache.commons.lang.StringUtils;

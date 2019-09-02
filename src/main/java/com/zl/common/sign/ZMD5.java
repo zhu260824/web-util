@@ -1,4 +1,4 @@
-package com.zl.common.util;
+package com.zl.common.sign;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

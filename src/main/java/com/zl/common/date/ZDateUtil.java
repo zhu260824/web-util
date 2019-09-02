@@ -41,8 +41,8 @@ public class ZDateUtil {
      * @return 获取当前时间的前num天
      */
     public static List<Date> getForwardNowDay(int num) {
-        Date nowDay=new Date(System.currentTimeMillis());
-        return getForwardDay(nowDay,num);
+        Date nowDay = new Date(System.currentTimeMillis());
+        return getForwardDay(nowDay, num);
     }
 
     /**
@@ -254,7 +254,7 @@ public class ZDateUtil {
     public static int getMaxMonthDay(int year, int month) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month-1);
+        calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -344,13 +344,38 @@ public class ZDateUtil {
     }
 
     /**
-     * 通过时间秒毫秒数判断两个时间的间隔
+     * 两个时间的间隔天数
      *
      * @return
      */
-    public static int differentDaysByMillisecond(Date startDay, Date endDay) {
-        int days = (int)((endDay.getTime() - startDay.getTime()) / (1000 * 3600 * 24));
-        return days;
+    public static int differentDays(Date startDay, Date endDay) {
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(startDay);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(endDay);
+        if (cal1.after(cal2)) {
+            Calendar temp = cal1;
+            cal1 = cal2;
+            cal2 = temp;
+        }
+        int day1 = cal1.get(Calendar.DAY_OF_YEAR);
+        int day2 = cal2.get(Calendar.DAY_OF_YEAR);
+        int year1 = cal1.get(Calendar.YEAR);
+        int year2 = cal2.get(Calendar.YEAR);
+        if (year1 != year2) {
+            int timeDistance = 0;
+            for (int i = year1; i < year2; i++) {
+                boolean isLeapYear = (i % 4 == 0 && i % 100 != 0 || i % 400 == 0);
+                if (isLeapYear) {
+                    timeDistance += 366;
+                } else {
+                    timeDistance += 365;
+                }
+            }
+            return timeDistance + (day2 - day1);
+        } else {
+            return day2 - day1;
+        }
     }
 
     public static int getNumberOfDaysInMonth(Date date) {
@@ -359,7 +384,4 @@ public class ZDateUtil {
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
-    public static java.sql.Date utilDateToSqlDate(Date date) {
-        return new java.sql.Date(date.getTime());
-    }
 }
