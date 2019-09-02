@@ -1,4 +1,4 @@
-package com.zl.util;
+package com.zl.common.util;
 
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;

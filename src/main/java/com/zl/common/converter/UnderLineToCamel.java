@@ -1,4 +1,6 @@
-package com.zl.util;
+package com.zl.common.converter;
+
+import com.zl.common.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;

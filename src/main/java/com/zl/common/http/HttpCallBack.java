@@ -1,4 +1,4 @@
-package com.zl.util.http;
+package com.zl.common.http;
 
 /**
  * @author zl

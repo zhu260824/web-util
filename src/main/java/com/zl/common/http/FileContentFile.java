@@ -1,20 +1,27 @@
-package com.zl.util.http;
+package com.zl.common.http;
 
+import java.io.File;
 import java.io.Serializable;
 
-public final class ByteContentFile implements Serializable {
-    private static final long serialVersionUID = 127254956313902461L;
+/**
+ * @author zl
+ * @Version 1.0
+ * @Description TODO
+ * @date 2018/11/02  10:21
+ */
+public class FileContentFile implements Serializable {
+    private static final long serialVersionUID = -6339050941229672951L;
     private String reqName;
     private String fileName;
-    private byte[] content;
+    private File file;
 
-    public ByteContentFile() {
+    public FileContentFile() {
     }
 
-    public ByteContentFile(String reqName, String fileName, byte[] content) {
+    public FileContentFile(String reqName, String fileName, File file) {
         this.reqName = reqName;
         this.fileName = fileName;
-        this.content = content;
+        this.file = file;
     }
 
     public String getReqName() {
@@ -33,20 +40,20 @@ public final class ByteContentFile implements Serializable {
         this.fileName = fileName;
     }
 
-    public byte[] getContent() {
-        return content;
+    public File getFile() {
+        return file;
     }
 
-    public void setContent(byte[] content) {
-        this.content = content;
+    public void setFile(File file) {
+        this.file = file;
     }
 
     @Override
     public String toString() {
-        return "ByteContentFile{" +
+        return "FileContentFile{" +
             "reqName='" + reqName + '\'' +
             ", fileName='" + fileName + '\'' +
-            ", content=" + content.length +
+            ", file=" + file.getAbsolutePath() +
             '}';
     }
 }

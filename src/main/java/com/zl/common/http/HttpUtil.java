@@ -1,8 +1,8 @@
-package com.zl.util.http;
+package com.zl.common.http;
 
 import com.alibaba.fastjson.TypeReference;
-import com.zl.util.JsonUtil;
-import com.zl.util.StringUtil;
+import com.zl.common.converter.JsonUtil;
+import com.zl.common.util.StringUtil;
 import okhttp3.*;
 
 import java.io.IOException;

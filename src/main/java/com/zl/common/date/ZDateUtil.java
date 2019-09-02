@@ -1,4 +1,6 @@
-package com.zl.util;
+package com.zl.common.date;
+
+import com.zl.common.util.StringUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +13,10 @@ import java.util.*;
  * @date 2019/06/24  11:17
  */
 public class ZDateUtil {
-
+    /**
+     * @param date 日期
+     * @return 传入日期的前一日
+     */
     public static Date getLastDay(Date date) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTime(date);
@@ -19,6 +24,11 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param date
+     * @param minute
+     * @return 传入日期增加minute分钟
+     */
     public static Date getDateMinute(Date date, int minute) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTime(date);
@@ -26,17 +36,20 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param num
+     * @return 获取当前时间的前num天
+     */
     public static List<Date> getForwardNowDay(int num) {
-        List<Date> dates = new ArrayList<>(num);
-        GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        for (int i = 0; i < num; i++) {
-            calendar.add(Calendar.DAY_OF_YEAR, -1);
-            dates.add(calendar.getTime());
-        }
-        return dates;
+        Date nowDay=new Date(System.currentTimeMillis());
+        return getForwardDay(nowDay,num);
     }
 
+    /**
+     * @param date
+     * @param num
+     * @return 获取date时间的前num天
+     */
     public static List<Date> getForwardDay(Date date, int num) {
         List<Date> dates = new ArrayList<>(num);
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
@@ -48,6 +61,10 @@ public class ZDateUtil {
         return dates;
     }
 
+    /**
+     * @param date
+     * @return 获取传入时间的月份的所有日期
+     */
     public static List<Date> getMonthAllDay(Date date) {
         List<Date> dates = new ArrayList<>();
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
@@ -61,12 +78,20 @@ public class ZDateUtil {
         return dates;
     }
 
+    /**
+     * @param date
+     * @return 传入date在当前月份中的位置
+     */
     public static int getDayInMonthIndex(Date date) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(date.getTime());
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
 
+    /**
+     * @param nowDay
+     * @return 获取传入日期的周起始时间
+     */
     public static Date getWeekStart(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -76,6 +101,10 @@ public class ZDateUtil {
         return monday;
     }
 
+    /**
+     * @param nowDay
+     * @return 获取传入日期的周结束时间
+     */
     public static Date getWeekEnd(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -85,6 +114,10 @@ public class ZDateUtil {
         return monday;
     }
 
+    /**
+     * @param nowDay
+     * @return 获取传入日期的上周起始时间
+     */
     public static Date getLastWeekStart(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -95,6 +128,10 @@ public class ZDateUtil {
         return monday;
     }
 
+    /**
+     * @param nowDay
+     * @return
+     */
     public static Date getLastWeekEnd(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -105,6 +142,10 @@ public class ZDateUtil {
         return monday;
     }
 
+    /**
+     * @param nowDay
+     * @return
+     */
     public static Date getMonthStart(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -112,6 +153,10 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param nowDay
+     * @return
+     */
     public static Date getMonthEnd(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -119,6 +164,10 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param nowDay
+     * @return
+     */
     public static Date getLastMonthStart(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -127,6 +176,10 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param nowDay
+     * @return
+     */
     public static Date getLastMonthDay(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -134,6 +187,10 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param nowDay
+     * @return
+     */
     public static Date getLastMonthEnd(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -142,6 +199,10 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param nowDay
+     * @return
+     */
     public static Date getLastYearDay(Date nowDay) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(nowDay.getTime());
@@ -149,29 +210,31 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param date
+     * @return
+     */
     public static int getDateYear(Date date) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(date.getTime());
         return calendar.get(Calendar.YEAR);
     }
 
+    /**
+     * @param date
+     * @return
+     */
     public static int getDateMonth(Date date) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.setTimeInMillis(date.getTime());
         return calendar.get(Calendar.MONTH) + 1;
     }
 
-    public static int getDateMonthDayNum(int year, int month) {
-        GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        return calendar.get(Calendar.DAY_OF_MONTH);
-    }
-
+    /**
+     * @param year
+     * @param month
+     * @return
+     */
     public static Date getDateYearMonth(int year, int month) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
@@ -183,27 +246,11 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
-    public static int getDaySpaceMonths(Date start, Date end) {
-        GregorianCalendar startCalendar = (GregorianCalendar)Calendar.getInstance();
-        startCalendar.setTime(start);
-        startCalendar.set(Calendar.DAY_OF_MONTH, startCalendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-        startCalendar.set(Calendar.HOUR_OF_DAY, 0);
-        startCalendar.set(Calendar.MINUTE, 0);
-        startCalendar.set(Calendar.SECOND, 0);
-        GregorianCalendar endCalendar = (GregorianCalendar)Calendar.getInstance();
-        endCalendar.setTime(end);
-        endCalendar.set(Calendar.DAY_OF_MONTH, startCalendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        endCalendar.set(Calendar.HOUR_OF_DAY, 23);
-        endCalendar.set(Calendar.MINUTE, 59);
-        endCalendar.set(Calendar.SECOND, 59);
-        int count = 0;
-        while (startCalendar.getTime().before(endCalendar.getTime())) {
-            count = count + 1;
-            startCalendar.add(Calendar.DAY_OF_YEAR, 1);
-        }
-        return count;
-    }
-
+    /**
+     * @param year
+     * @param month
+     * @return
+     */
     public static int getMaxMonthDay(int year, int month) {
         GregorianCalendar calendar = (GregorianCalendar)Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
@@ -215,6 +262,10 @@ public class ZDateUtil {
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
 
+    /**
+     * @param date
+     * @return
+     */
     public static Date setDateToMinHour(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -222,6 +273,10 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
+    /**
+     * @param date
+     * @return
+     */
     public static Date setDateToMaxHour(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -229,7 +284,10 @@ public class ZDateUtil {
         return calendar.getTime();
     }
 
-    // 获得当前日期与本周一相差的天数
+    /**
+     * @param dayOfWeek
+     * @return 获得当前日期与本周一相差的天数
+     */
     public static int getMondayPlus(int dayOfWeek) {
         if (dayOfWeek == 1) {
             return -6;

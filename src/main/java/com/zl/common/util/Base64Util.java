@@ -1,4 +1,4 @@
-package com.zl.util;
+package com.zl.common.util;
 
 
 import org.apache.commons.codec.binary.Base64;
